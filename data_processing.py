@@ -12,14 +12,6 @@ class TumorDataProcessor:
         self.training_data = []
         self.validation_data = []
 
-class TumorDataProcessor:
-    def __init__(self, root_dir, labels, img_size=200):
-        self.root_dir = root_dir
-        self.labels = labels
-        self.img_size = img_size
-        self.training_data = []
-        self.validation_data = []
-
     def create_training_data(self):
         training_dir = os.path.join(self.root_dir, "Training")
         for label in self.labels:
@@ -65,11 +57,11 @@ def convert_to_tensor(data):
         img = img / 255.0
         X.append(img)
 
-        # make model more specific later in model analysis.
-        if label == "glioma" or label == "meningioma" or label == "pituitary":
-            y.append(0)
-        if label == "notumor":
-            y.append(1)
+        if label in ["glioma", "meningioma", "pituitary"]:
+            y.append(1)  # Tumor
+        else:
+            y.append(0)  # No tumor
+
     
     X_array = np.array(X, dtype=np.float32)
     y_array = np.array(y, dtype=np.float32)
