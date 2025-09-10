@@ -18,7 +18,7 @@ class TumorClassifier(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2),
         )
         self.classifier = nn.Sequential(
-            nn.Linear(64 * 28 * 28, 128),  # Adjusted for additional pooling
+            nn.Linear(64 * 28 * 28, 128),
             nn.ReLU(inplace=True),
             nn.Linear(128, num_classes)
         )
